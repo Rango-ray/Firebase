@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1064135727959",
+    "project_id": "aaaa-record",
+    "storage_bucket": "aaaa-record.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1064135727959:android:f6589006ecac612ae77c12",
+        "android_client_info": {
+          "package_name": "com.example.loggin_page"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCR4a2R6hJt9wQDQ6uBIMFNEZHBpmrmaco"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
