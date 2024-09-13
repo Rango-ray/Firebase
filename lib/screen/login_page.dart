@@ -124,14 +124,14 @@ class LoginPage extends StatelessWidget {
                           ScaffoldMessenger.of(context).showSnackBar(
                            const SnackBar(
                               
-                              backgroundColor: Colors.yellowAccent,
+                              backgroundColor: Color.fromARGB(255, 15, 79, 255),
                               dismissDirection: DismissDirection.up,
                               duration: const Duration(seconds: 7),
                               content: const Text(
-                                "       📛Wrong Email or Password📛",
+                                "       Wrong Email or Password",
                                 style: TextStyle(
                                    
-                                    backgroundColor: Colors.yellowAccent,
+                                    backgroundColor: Color.fromARGB(255, 15, 79, 255),
                                     color: Colors.red,
                                     fontSize: 30),
                               ),

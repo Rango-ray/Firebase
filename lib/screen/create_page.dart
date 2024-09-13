@@ -168,14 +168,14 @@ class _SignUpPageState extends State<SignUpPage> {
                         if (error.toString() == invalidemailError) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
-                              backgroundColor: Colors.yellowAccent,
+                              backgroundColor: Color.fromARGB(255, 15, 79, 255),
                               dismissDirection: DismissDirection.up,
                               duration: Duration(seconds: 7),
                               content: Text(
-                                "📛Invalid Email📛",
+                                "Invalid Email",
                                 style: TextStyle(
-                                    backgroundColor: Colors.yellowAccent,
-                                    color: Colors.red,
+                                    backgroundColor: Color.fromARGB(255, 15, 79, 255),
+                                    color: Color.fromARGB(255, 255, 255, 255),
                                     fontSize: 30),
                               ),
                             ),
@@ -183,14 +183,14 @@ class _SignUpPageState extends State<SignUpPage> {
                         } else if (error.toString() == emailExistError) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
-                              backgroundColor: Colors.yellowAccent,
+                              backgroundColor: Color.fromARGB(255, 15, 79, 255),
                               dismissDirection: DismissDirection.up,
                               duration: Duration(seconds: 7),
                               content: Text(
-                                "Email Address Already Exist📛",
+                                "Email Address Already Exist",
                                 style: TextStyle(
-                                    backgroundColor: Colors.yellowAccent,
-                                    color: Colors.red,
+                                    backgroundColor: Color.fromARGB(255, 15, 79, 255),
+                                    color: Color.fromARGB(255, 255, 255, 255),
                                     fontSize: 30),
                               ),
                             ),
@@ -199,14 +199,14 @@ class _SignUpPageState extends State<SignUpPage> {
                         else if(error.toString() == weakPassword){
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
-                              backgroundColor: Colors.yellowAccent,
+                              backgroundColor: Color.fromARGB(255, 15, 79, 255),
                               dismissDirection: DismissDirection.up,
                               duration: Duration(seconds: 7),
                               content: Text(
-                                "📛Waek Password Plz Enter at least 6 characters📛",
+                                "Weak Password Plz Enter at least 6 characters",
                                 style: TextStyle(
-                                    backgroundColor: Colors.yellowAccent,
-                                    color: Colors.red,
+                                    backgroundColor: Color.fromARGB(255, 15, 79, 255),
+                                    color: Color.fromARGB(255, 255, 255, 255),
                                     fontSize: 30),
                               ),
                             ),
