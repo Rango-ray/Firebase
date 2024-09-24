@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:loggin_page/screen/forgot_page.dart';
-import 'package:loggin_page/screen/login_page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'login_page.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -14,224 +13,153 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController _passwordTextController = TextEditingController();
   final TextEditingController _emailTextController = TextEditingController();
   final TextEditingController _userNameTextController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Sigin Up Page',
-          style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-            color: Color.fromARGB(255, 255, 255, 255),
-            ),
-        ),
-        centerTitle: true,
-        backgroundColor: const Color.fromARGB(255, 80, 82, 82),
+    return CupertinoPageScaffold(
+      navigationBar: const CupertinoNavigationBar(
+        middle: Text('Sign Up Page'),
+        backgroundColor: CupertinoColors.systemGrey,
       ),
-      //appbar
-
-      body: Container(
+      child: Container(
         decoration: const BoxDecoration(
-            gradient: LinearGradient(
-          colors: [
-            Color.fromARGB(255, 234, 248, 231),
-            Color.fromARGB(255, 0, 0, 0)
-          ],
-          begin: Alignment.topRight,
-          end: Alignment.bottomLeft,
-        )),
+          gradient: LinearGradient(
+            colors: [
+              CupertinoColors.lightBackgroundGray,
+              CupertinoColors.black,
+            ],
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+          ),
+        ),
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              TextField(
-                enableSuggestions: false,
+              CupertinoTextField(
                 controller: _emailTextController,
-                autocorrect: true,
-                cursorColor: Colors.white,
-                decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.email_outlined),
-                  labelText: 'Enter your Email',
-                  filled: true,
-                  floatingLabelBehavior: FloatingLabelBehavior.never,
-                  fillColor: const Color.fromARGB(200, 233, 226, 233),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                    borderSide: const BorderSide(
-                      width: 0,
-                      style: BorderStyle.none,
-                    ),
-                  ),
+                placeholder: 'Enter your Email',
+                prefix: const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Icon(CupertinoIcons.mail_solid),
+                ),
+                decoration: BoxDecoration(
+                  color: CupertinoColors.systemGrey6,
+                  borderRadius: BorderRadius.circular(30.0),
                 ),
                 keyboardType: TextInputType.emailAddress,
               ),
-
-              const SizedBox(
-                height: 20,
-              ),
-
-              //usernamee...
-              TextField(
-                obscureText: true,
+              const SizedBox(height: 20),
+              CupertinoTextField(
                 controller: _userNameTextController,
-                enableSuggestions: false,
-                autocorrect: true,
-                cursorColor: Colors.white,
-                decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.person_2_outlined),
-                  labelText: 'Enter Username',
-                  filled: true,
-                  floatingLabelBehavior: FloatingLabelBehavior.never,
-                  fillColor: const Color.fromARGB(200, 233, 226, 233),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                    borderSide: const BorderSide(
-                      width: 0,
-                      style: BorderStyle.none,
-                    ),
-                  ),
+                placeholder: 'Enter Username',
+                prefix: const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Icon(CupertinoIcons.person_solid),
                 ),
-                keyboardType: TextInputType.visiblePassword,
+                decoration: BoxDecoration(
+                  color: CupertinoColors.systemGrey6,
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
               ),
-              const SizedBox(
-                height: 15,
-              ),
-              TextField(
-                obscureText: true,
+              const SizedBox(height: 15),
+              CupertinoTextField(
                 controller: _passwordTextController,
-                autocorrect: true,
-                enableSuggestions: false,
-                cursorColor: Colors.white,
-                decoration: InputDecoration(
-                  prefixIcon: const Icon(
-                    Icons.lock,
-                    color: Color.fromARGB(255, 61, 2, 40),
-                  ),
-                  labelText: ' Your Password',
-                  filled: true,
-                  floatingLabelBehavior: FloatingLabelBehavior.never,
-                  fillColor: const Color.fromARGB(200, 233, 226, 233),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                    borderSide: const BorderSide(
-                      width: 0,
-                      style: BorderStyle.none,
-                    ),
-                  ),
+                placeholder: 'Your Password',
+                obscureText: true,
+                prefix: const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Icon(CupertinoIcons.lock),
+                ),
+                decoration: BoxDecoration(
+                  color: CupertinoColors.systemGrey6,
+                  borderRadius: BorderRadius.circular(30.0),
                 ),
               ),
               const SizedBox(height: 20),
-              // ElevatedButton(
-              //   onPressed: () {
-              //     // Perform sign-in logic here
-              //   },
-              //   child: const Text('Sign In' ,
-              //   style: TextStyle(
-              //     color: Colors.black,
-              //     fontSize: 16,
-
-              //   ),),
-              // ),
-
-                            Container(
+              Container(
                 width: MediaQuery.of(context).size.width,
                 height: 60,
                 margin: const EdgeInsets.fromLTRB(0, 10, 0, 20),
-                decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(90)),
-                child: ElevatedButton(
+                child: CupertinoButton.filled(
                   onPressed: () {
                     FirebaseAuth.instance
                         .createUserWithEmailAndPassword(
-                            email: _emailTextController.text,
-                            password: _passwordTextController.text)
-                        .then(
-                      (value) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => LoginPage(),
+                          email: _emailTextController.text,
+                          password: _passwordTextController.text,
+                        )
+                        .then((value) {
+                      Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                          builder: (context) => LoginPage(),
+                        ),
+                      );
+                    }).onError((error, stackTrace) {
+                      var invalidemailError =
+                          "[firebase_auth/invalid-email] The email address is badly formatted.";
+                      var emailExistError =
+                          "[firebase_auth/email-already-in-use] The email address is already in use by another account.";
+                      var weakPassword =
+                          "[firebase_auth/weak-password] Password should be at least 6 characters";
+                      if (error.toString() == invalidemailError) {
+                        showCupertinoDialog(
+                          context: context,
+                          builder: (context) => CupertinoAlertDialog(
+                            title: const Text('Error'),
+                            content: const Text('Invalid Email'),
+                            actions: <Widget>[
+                              CupertinoDialogAction(
+                                child: const Text('OK'),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
                           ),
                         );
-                      },
-                    ).onError(
-                      (error, stackTrace) {
-                        var invalidemailError =
-                            "[firebase_auth/invalid-email] The email address is badly formatted.";
-                        var emailExistError =
-                            "[firebase_auth/email-already-in-use] The email address is already in use by another account.";
-                        var weakPassword =
-                            "[firebase_auth/weak-password] Password should be at least 6 characters";
-                        print(error);
-                        if (error.toString() == invalidemailError) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              backgroundColor: Color.fromARGB(255, 15, 79, 255),
-                              dismissDirection: DismissDirection.up,
-                              duration: Duration(seconds: 7),
-                              content: Text(
-                                "Invalid Email",
-                                style: TextStyle(
-                                    backgroundColor: Color.fromARGB(255, 15, 79, 255),
-                                    color: Color.fromARGB(255, 255, 255, 255),
-                                    fontSize: 30),
+                      } else if (error.toString() == emailExistError) {
+                        showCupertinoDialog(
+                          context: context,
+                          builder: (context) => CupertinoAlertDialog(
+                            title: const Text('Error'),
+                            content: const Text('Email Address Already Exists'),
+                            actions: <Widget>[
+                              CupertinoDialogAction(
+                                child: const Text('OK'),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
                               ),
-                            ),
-                          );
-                        } else if (error.toString() == emailExistError) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              backgroundColor: Color.fromARGB(255, 15, 79, 255),
-                              dismissDirection: DismissDirection.up,
-                              duration: Duration(seconds: 7),
-                              content: Text(
-                                "Email Address Already Exist",
-                                style: TextStyle(
-                                    backgroundColor: Color.fromARGB(255, 15, 79, 255),
-                                    color: Color.fromARGB(255, 255, 255, 255),
-                                    fontSize: 30),
+                            ],
+                          ),
+                        );
+                      } else if (error.toString() == weakPassword) {
+                        showCupertinoDialog(
+                          context: context,
+                          builder: (context) => CupertinoAlertDialog(
+                            title: const Text('Error'),
+                            content: const Text(
+                                'Weak Password. Please enter at least 6 characters.'),
+                            actions: <Widget>[
+                              CupertinoDialogAction(
+                                child: const Text('OK'),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
                               ),
-                            ),
-                          );
-                        }
-                        else if(error.toString() == weakPassword){
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              backgroundColor: Color.fromARGB(255, 15, 79, 255),
-                              dismissDirection: DismissDirection.up,
-                              duration: Duration(seconds: 7),
-                              content: Text(
-                                "Weak Password Plz Enter at least 6 characters",
-                                style: TextStyle(
-                                    backgroundColor: Color.fromARGB(255, 15, 79, 255),
-                                    color: Color.fromARGB(255, 255, 255, 255),
-                                    fontSize: 30),
-                              ),
-                            ),
-                          );
-                        }
-                      },
-                    );
+                            ],
+                          ),
+                        );
+                      }
+                    });
                   },
-                  style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.resolveWith((states) {
-                        if (states.contains(MaterialState.pressed)) {
-                          return Colors.blue;
-                        }
-                        return Colors.yellow;
-                      }),
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30)))),
                   child: const Text(
-                    "SignUp",
+                    "Sign Up",
                     style: TextStyle(
-                        color: Colors.blue,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20),
+                      fontSize: 20,
+                    ),
                   ),
                 ),
               ),
@@ -241,17 +169,17 @@ class _SignUpPageState extends State<SignUpPage> {
                 children: <Widget>[
                   GestureDetector(
                     onTap: () {
-                      // Navigate to Sign Up page
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) => const SignUpPage()),
+                        CupertinoPageRoute(
+                          builder: (context) => const SignUpPage(),
+                        ),
                       );
                     },
                     child: const Text(
-                      'Sign Up ',
+                      'Sign Up',
                       style: TextStyle(
-                        color: Colors.blue,
+                        color: CupertinoColors.activeBlue,
                         fontSize: 15,
                       ),
                     ),
@@ -259,24 +187,23 @@ class _SignUpPageState extends State<SignUpPage> {
                   const SizedBox(width: 10),
                   GestureDetector(
                     onTap: () {
-                      // Navigate to Forgot Password page
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) => const ForgotPage()),
+                        CupertinoPageRoute(
+                          builder: (context) => const SignUpPage(),
+                        ),
                       );
                     },
                     child: const Text(
                       'Forgot password?',
                       style: TextStyle(
-                        color: Color.fromARGB(255, 255, 255, 255,),
+                        color: CupertinoColors.white,
                         fontSize: 16,
                       ),
                     ),
                   ),
                 ],
               ),
-              
             ],
           ),
         ),
